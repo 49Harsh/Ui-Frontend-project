@@ -16,6 +16,7 @@ export default function Home() {
       <Hero />
       <GradientDivider />
       <Features />
+      <GradientDivider />
       <ContactForm />
     </main>
   )

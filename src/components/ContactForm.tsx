@@ -1,16 +1,42 @@
-import React, { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import React, { useState, useEffect, useMemo, useRef } from 'react'
+import { motion, AnimatePresence, useAnimation } from 'framer-motion'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
 import anime from 'animejs'
 
-const ContactForm = () => {
+interface RandomPosition {
+  left: string;
+  top: string;
+  animationDuration: string;
+}
+
+const generateRandomPositions = (count: number): RandomPosition[] => {
+  return Array.from({ length: count }, () => ({
+    left: `${Math.random() * 100}%`,
+    top: `${Math.random() * 100}%`,
+    animationDuration: `${Math.random() * 5 + 5}s`,
+  }));
+};
+
+interface FormField {
+  type: string;
+  placeholder: string;
+  value: string;
+  onChange: (value: string) => void;
+}
+
+const ContactForm: React.FC = () => {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState<null | 'success' | 'error'>(null)
+  const [isVisible, setIsVisible] = useState(false)
+
+  const randomPositions = useMemo(() => generateRandomPositions(20), []);
+  const controls = useAnimation()
+  const sectionRef = useRef(null)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -25,7 +51,7 @@ const ContactForm = () => {
     setMessage('')
   }
 
-  const formFields = [
+  const formFields: FormField[] = [
     { type: 'text', placeholder: 'Name', value: name, onChange: setName },
     { type: 'email', placeholder: 'Email', value: email, onChange: setEmail },
     { type: 'textarea', placeholder: 'Message', value: message, onChange: setMessage },
@@ -58,20 +84,50 @@ const ContactForm = () => {
     }
   }, [])
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true)
+          controls.start("visible")
+        }
+      },
+      { threshold: 0.1 }
+    )
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current)
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current)
+      }
+    }
+  }, [controls])
+
   return (
-    <section id="contact" className="py-20 bg-gradient-to-br from-indigo-900 via-blue-900 to-purple-900 relative overflow-hidden min-h-screen flex items-center">
+    <section id="contact" ref={sectionRef} className="py-20 bg-gradient-to-br from-indigo-900 via-blue-900 to-purple-900 relative overflow-hidden min-h-screen flex items-center">
       <div className="container mx-auto px-6 relative z-10">
         <motion.h2
           className="text-4xl md:text-5xl font-bold text-center mb-16 text-white"
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial="hidden"
+          animate={controls}
+          variants={{
+            hidden: { opacity: 0, y: -50 },
+            visible: { opacity: 1, y: 0 },
+          }}
           transition={{ duration: 0.8 }}
         >
           Contact Us
         </motion.h2>
         <motion.form
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial="hidden"
+          animate={controls}
+          variants={{
+            hidden: { opacity: 0, y: 50 },
+            visible: { opacity: 1, y: 0 },
+          }}
           transition={{ duration: 0.5 }}
           onSubmit={handleSubmit}
           className="max-w-md mx-auto bg-white bg-opacity-10 backdrop-filter backdrop-blur-lg p-8 rounded-lg shadow-xl"
@@ -80,8 +136,12 @@ const ContactForm = () => {
             <motion.div
               key={field.placeholder}
               className="mb-4"
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial="hidden"
+              animate={controls}
+              variants={{
+                hidden: { opacity: 0, x: -50 },
+                visible: { opacity: 1, x: 0 },
+              }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               {field.type === 'textarea' ? (
@@ -105,8 +165,12 @@ const ContactForm = () => {
             </motion.div>
           ))}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial="hidden"
+            animate={controls}
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 1, y: 0 },
+            }}
             transition={{ duration: 0.5, delay: 0.3 }}
           >
             <Button 
@@ -136,24 +200,26 @@ const ContactForm = () => {
       </div>
 
       {/* Background squares */}
-      {Array.from({ length: 20 }).map((_, i) => (
+      {isVisible && randomPositions.map((position, i) => (
         <motion.div
           key={i}
           className="absolute w-8 h-8 rounded-lg bg-white opacity-10"
+          initial={{ opacity: 0, scale: 0 }}
           animate={{
+            opacity: 0.1,
+            scale: 1,
             x: [0, Math.random() * 100 - 50],
             y: [0, Math.random() * 100 - 50],
             rotate: [0, Math.random() * 360],
-            scale: [1, Math.random() * 0.5 + 0.5],
           }}
           transition={{
-            duration: Math.random() * 5 + 5,
+            duration: parseFloat(position.animationDuration),
             repeat: Infinity,
             repeatType: "reverse",
           }}
           style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
+            left: position.left,
+            top: position.top,
           }}
         />
       ))}
