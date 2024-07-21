@@ -46,6 +46,7 @@ const features: Feature[] = [
 const Features = () => {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, amount: 0.2 })
+  const isClient = typeof window !== 'undefined';
 
   return (
     <section id="features" className="py-20 bg-gradient-to-br from-indigo-900 via-blue-900 to-purple-900 relative overflow-hidden">
@@ -95,7 +96,7 @@ const Features = () => {
         </div>
       </motion.div>
       {/* Particle effect (simplified version) */}
-      {Array.from({ length: 20 }).map((_, i) => (
+      {/* {Array.from({ length: 20 }).map((_, i) => (
         <motion.div
           key={i}
           className="absolute w-2 h-2 rounded-full bg-white opacity-50"
@@ -111,6 +112,26 @@ const Features = () => {
           style={{
             left: Math.random() * window.innerWidth,
             top: Math.random() * window.innerHeight,
+          }}
+        />
+      ))} */}
+
+    {Array.from({ length: 20 }).map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute w-2 h-2 rounded-full bg-white opacity-50"
+          animate={{
+            x: isClient ? [0, Math.random() * window.innerWidth] : 0,
+            y: isClient ? [0, Math.random() * window.innerHeight] : 0,
+          }}
+          transition={{
+            duration: Math.random() * 10 + 10,
+            repeat: Infinity,
+            repeatType: 'reverse',
+          }}
+          style={{
+            left: isClient ? Math.random() * window.innerWidth : 0,
+            top: isClient ? Math.random() * window.innerHeight : 0,
           }}
         />
       ))}
