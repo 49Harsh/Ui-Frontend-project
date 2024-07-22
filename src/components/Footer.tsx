@@ -26,7 +26,8 @@ const Footer = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <h3 className="text-xl font-bold">Created by Harsh Yadav</h3>
+            <h3 className="text-xl font-bold">Created by Harsh Yadav </h3>
+            
           </motion.div>
           <motion.div 
             className="flex space-x-4"
