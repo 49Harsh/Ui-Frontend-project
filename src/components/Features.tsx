@@ -63,7 +63,7 @@ const Features = () => {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -50 }}
           transition={{ duration: 0.8, delay: 0.2 }}
         >
-          Our Powerful Features
+          Our Vission
         </motion.h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {features.map((feature, index) => (
