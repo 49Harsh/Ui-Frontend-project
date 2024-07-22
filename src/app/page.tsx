@@ -12,7 +12,7 @@ export default function Home() {
   useSmoothScroll()
 
   return (
-    <main>
+    <main >
       <Header />
       <Hero />
       <GradientDivider />

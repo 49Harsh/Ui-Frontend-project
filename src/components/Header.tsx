@@ -26,7 +26,7 @@ const Header = () => {
           <div className="hidden md:flex space-x-4">
             <Link href="#home" className="text-gray-400 hover:text-gray-100">Home</Link>
             <Link href="#features" className="text-gray-400 hover:text-gray-100">Features</Link>
-            <Link href="#pricing" className="text-gray-400 hover:text-gray-100">Pricing</Link>
+            <Link href="#footer" className="text-gray-400 hover:text-gray-100">Footer</Link>
             <Link href="#contact" className="text-gray-400 hover:text-gray-100">Contact</Link>
           </div>
 
@@ -59,7 +59,7 @@ const Header = () => {
             >
               <Link href="#home" className="block py-2 text-gray-400 hover:text-gray-100">Home</Link>
               <Link href="#features" className="block py-2 text-gray-400 hover:text-gray-100">Features</Link>
-              <Link href="#pricing" className="block py-2 text-gray-400 hover:text-gray-100">Pricing</Link>
+              <Link href="#footer" className="block py-2 text-gray-400 hover:text-gray-100">Footer</Link>
               <Link href="#contact" className="block py-2 text-gray-400 hover:text-gray-100">Contact</Link>
             </motion.div>
           )}

@@ -12,7 +12,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-gradient-to-br from-indigo-900 via-blue-900 to-purple-900 text-white py-8">
+    <footer id='footer' className="bg-gradient-to-br from-indigo-900 via-blue-900 to-purple-900 text-white py-8">
       <div className="container mx-auto px-4">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
