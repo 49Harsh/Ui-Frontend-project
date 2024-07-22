@@ -6,6 +6,7 @@ import Features from '@/components/Features'
 import ContactForm from '@/components/ContactForm'
 import { useSmoothScroll } from '@/hooks/useSmootScroll'
 import GradientDivider from '@/components/GradientDivider'
+import Footer from '@/components/Footer'
 
 export default function Home() {
   useSmoothScroll()
@@ -18,6 +19,8 @@ export default function Home() {
       <Features />
       <GradientDivider />
       <ContactForm />
+      <GradientDivider />
+      <Footer />
     </main>
   )
 }
