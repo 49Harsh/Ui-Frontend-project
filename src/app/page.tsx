@@ -10,6 +10,7 @@ import Footer from '@/components/Footer'
 import ServicesPage from '@/components/Services'
 import Slider from '@/components/Slider'
 import AboutAndMission from '@/components/AboutAndMission'
+import TestimonialsPage from '@/components/TestimonialsPage'
 
 export default function Home() {
   useSmoothScroll()
@@ -28,6 +29,7 @@ export default function Home() {
       <AboutAndMission />
       <GradientDivider />
       <ContactForm />
+      <TestimonialsPage />
       <GradientDivider />
       <Footer />
     </main>
