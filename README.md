@@ -1,3 +1,41 @@
+Dear Recruiter,
+
+I hope this email finds you well. I am writing to inform you that I have successfully completed the task you assigned to me and have made additional improvements to enhance the project further.
+
+For this project, I utilized Next.js as the primary framework, along with TypeScript, Tailwind CSS for styling, and Shadcn for UI components. To enhance the user experience, I incorporated various animations using Framer Motion.
+
+Some of the key features I implemented include:
+1. A particle animation that follows the mouse cursor
+2. Box animation on the contact page
+3. Several other dynamic elements throughout the site
+4. Implemented rotating background numbers that respond to scrolling on testimonials page
+6. Created a responsive grid layout for testimonials
+7. Incorporated smooth animations for page elements using Framer Motion
+
+
+Deploy-Link = https://main--iridescent-kulfi-c01a35.netlify.app/
+github-Link = https://github.com/49Harsh/Ui-Frontend-project
+
+I believe these additions not only meet the project requirements but also elevate the overall user experience and showcase our attention to detail.
+
+I would be happy to discuss the project in more detail or make any necessary adjustments. Please let me know if you need any further information or if you'd like to schedule a review of the completed task.
+
+Thank you for this opportunity. I look forward to your feedback.
+
+Sincerely,
+Harsh Yadav
+
+
+
+
+
+
+
+
+
+
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
